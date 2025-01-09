@@ -1,0 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Dashboard: React.FC = () => {
+  const [users, setUsers] = useState<any[]>([]);
+  const API_URL = '<YOUR_CLOUD_FUNCTION_URL>';
+
+  const fetchUsers = async () => {
+    const { data } = await axios.get(`${API_URL}`);
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
+      <table className="w-full bg-white shadow-md rounded">
+        <thead>
+          <tr>
+            <th className="p-4 border-b">Name</th>
+            <th className="p-4 border-b">Email</th>
+            <th className="p-4 border-b">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td className="p-4 border-b">{user.name}</td>
+              <td className="p-4 border-b">{user.email}</td>
+              <td className="p-4 border-b">
+                {/* Action Buttons for Update and Delete */}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default Dashboard;
