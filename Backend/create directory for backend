@@ -1,0 +1,4 @@
+mkdir backend && cd backend
+gcloud functions deploy userHandler --runtime nodejs16 --trigger-http --allow-unauthenticated
+npm init -y
+npm install express cors body-parser firebase-admin
