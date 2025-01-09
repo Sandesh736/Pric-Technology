@@ -1,0 +1,4 @@
+gcloud functions deploy userHandler \
+  --runtime nodejs16 \
+  --trigger-http \
+  --allow-unauthenticated
